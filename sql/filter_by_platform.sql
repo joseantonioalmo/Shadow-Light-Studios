@@ -1,0 +1,1 @@
+SELECT * FROM ads_spend WHERE platform = '{platform}' AND date BETWEEN '{start}' AND '{end}';

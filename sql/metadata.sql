@@ -1,0 +1,1 @@
+SELECT DISTINCT load_date, source_file_name FROM ads_spend ORDER BY load_date DESC;

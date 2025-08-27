@@ -1,0 +1,18 @@
+User (Frontend)
+    ↓
+Backend Orchestrator
+    ↓
+LLM-2 (Query Need Assessor)
+    ↓
+[If False] → LLM-1 (Conversation Manager) → Orchestrator → Frontend
+[If True]  → LLM-3 (Query Builder)
+                ↓
+        Query Runner (subprocess)
+                ↓
+            DuckDB (Database)
+                ↓
+        Query Runner → Orchestrator
+                ↓
+        LLM-1 (Conversation Manager)
+                ↓
+        Orchestrator → Frontend
