@@ -1,0 +1,77 @@
+{
+  "name": "DEMO INGEST",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        48,
+        48
+      ],
+      "id": "312d7129-df2e-496c-b53f-96e1917d2c2f",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "command": "cd \"/Users/juliaalvarez/Eight Figure\" && source .venv/bin/activate && python ingest_ads_spend.py"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        256,
+        48
+      ],
+      "id": "41e8524a-b78f-44b6-9e70-d39ac46d9de1",
+      "name": "Execute Command"
+    },
+    {
+      "parameters": {
+        "command": "cd \"/Users/juliaalvarez/Eight Figure\" && source .venv/bin/activate && python validate_ingestion.py"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        464,
+        48
+      ],
+      "id": "683b918a-bde4-40c6-9411-db14d8b8e7b0",
+      "name": "Execute Command1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command": {
+      "main": [
+        [
+          {
+            "node": "Execute Command1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "274a9d5e-85e7-4188-a358-670b4f9f6ea4",
+  "meta": {
+    "instanceId": "c7394ac4acf82388f869b934b207c696fb0305d7ba60aca59504149f9472e78b"
+  },
+  "id": "Yxv7EE4eQaUhpoDS",
+  "tags": []
+}

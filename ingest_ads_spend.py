@@ -14,11 +14,25 @@ df['source_file_name'] = os.path.basename(csv_path)
 
 db = duckdb.connect(db_path)
 
-df.to_sql(table_name, db, if_exists='append', index=False)
+db.execute(f"""
+CREATE TABLE IF NOT EXISTS {table_name} (
+    date DATE,
+    platform VARCHAR,
+    account VARCHAR,
+    campaign VARCHAR,
+    country VARCHAR,
+    device VARCHAR,
+    spend DOUBLE,
+    clicks INTEGER,
+    impressions INTEGER,
+    conversions INTEGER,
+    load_date TIMESTAMP,
+    source_file_name VARCHAR
+)
+""")
 
-db = duckdb.connect(db_path)
-result = db.execute(f"SELECT * FROM {table_name} ORDER BY load_date DESC LIMIT 10").fetchdf()
-print("Latest ingested rows:")
-print(result)
+db.register('temp_df', df)
+db.execute(f"INSERT INTO {table_name} SELECT * FROM temp_df")
+
 db.close()
 print('Ingestion complete.')
